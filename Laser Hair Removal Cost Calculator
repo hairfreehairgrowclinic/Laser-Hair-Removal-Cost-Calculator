@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Laser Hair Removal Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .result {
+      background-color: #f1f8e9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    h2 {
+      color: #2e7d32;
+    }
+    button {
+      background: #2e7d32;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    .note {
+      font-size: 0.95em;
+      margin-top: 10px;
+      background: #fff3cd;
+      padding: 10px;
+      border-left: 4px solid #ffc107;
+      border-radius: 5px;
+    }
+    .cta {
+      margin-top: 30px;
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    .cta a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cta a:hover {
+      text-decoration: underline;
+    }
+    .hint {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Laser Hair Removal Cost Calculator</h2>
+
+<form onsubmit="event.preventDefault(); calculateLaserCost();">
+  <label>Enter Your City:</label>
+  <input type="text" id="city" placeholder="e.g., Mumbai, Bangalore, Delhi" required>
+
+  <label>Select Treatment Area:</label>
+  <select id="area" required>
+    <option value="">Choose Area</option>
+    <option value="Upper Lip">Upper Lip</option>
+    <option value="Underarms">Underarms</option>
+    <option value="Full Face">Full Face</option>
+    <option value="Full Arms">Full Arms</option>
+    <option value="Full Legs">Full Legs</option>
+    <option value="Chest">Chest</option>
+    <option value="Back">Back</option>
+    <option value="Full Body">Full Body</option>
+  </select>
+
+  <label>Sessions Required:</label>
+  <input type="number" id="sessions" min="1" max="12" placeholder="e.g., 6" required>
+  <div class="hint">Most individuals require 6 to 10 sessions for best results.</div>
+
+  <button type="submit">Calculate Cost</button>
+</form>
+
+<div class="note">
+  <strong>Note:</strong> Cost varies by body part, laser type, and city. This is an estimated average range. Final pricing will be confirmed during your consultation.
+</div>
+
+<div id="result" class="result"></div>
+
+<div class="cta">
+  💬 Want to book a session or consult a specialist?<br>
+  <a href="tel:+917272832222">📞 Contact Us: +91 72728 32222</a>
+</div>
+
+<script>
+  function calculateLaserCost() {
+    const city = document.getElementById('city').value.trim();
+    const area = document.getElementById('area').value;
+    const sessions = parseInt(document.getElementById('sessions').value);
+
+    const areaRates = {
+      "Upper Lip": 500,
+      "Underarms": 1000,
+      "Full Face": 2500,
+      "Full Arms": 3500,
+      "Full Legs": 4000,
+      "Chest": 3000,
+      "Back": 3500,
+      "Full Body": 8000
+    };
+
+    const perSessionCost = areaRates[area];
+    const totalCost = perSessionCost * sessions;
+
+    document.getElementById('result').innerHTML = `
+      <h3>Estimated Laser Hair Removal Cost</h3>
+      <strong>City:</strong> ${city}<br>
+      <strong>Treatment Area:</strong> ${area}<br>
+      <strong>Sessions:</strong> ${sessions}<br>
+      <strong>Estimated Cost:</strong> <span style="color:green; font-weight:bold;">₹${totalCost.toLocaleString()}</span>
+    `;
+  }
+</script>
+
+</body>
+</html>
